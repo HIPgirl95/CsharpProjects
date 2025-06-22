@@ -1,12 +1,12 @@
 ﻿using System;
 
 // initialize variables - graded assignments 
-int currentAssignments = 5;
+int examAssignments = 5;
 
-int[] sophiaScores = new int[] {90, 86, 87, 98, 100};
-int[] andrewScores = new int[] {92, 89, 81, 96, 90};
-int[] emmaScores = new int[] {90, 85, 87, 98, 68};
-int[] loganScores = new int[] { 90, 95, 87, 88, 96 };
+int[] sophiaScores = new int[] { 90, 86, 87, 98, 100, 94, 90 };
+int[] andrewScores = new int[] { 92, 89, 81, 96, 90, 89 };
+int[] emmaScores = new int[] { 90, 85, 87, 98, 68, 89, 89, 89 };
+int[] loganScores = new int[] { 90, 95, 87, 88, 96, 96 };
 
 string[] studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan" };
 
@@ -21,23 +21,40 @@ foreach (string name in studentNames)
 
     if (currentStudent == "Sophia")
         studentScores = sophiaScores;
+
     else if (currentStudent == "Andrew")
         studentScores = andrewScores;
+
     else if (currentStudent == "Emma")
         studentScores = emmaScores;
+
     else if (currentStudent == "Logan")
         studentScores = loganScores;
-    {
+    
         int sumAssignmentScores = 0;
         decimal currentStudentGrade;
 
+        //initialize/reset a counter for graded assignments
+        int gradedAssignments = 0;
+
         foreach (int score in studentScores)
         {
-            // add each score to the sum
-            sumAssignmentScores += score;
-        }
+            //count the number of graded assignments
+            gradedAssignments += 1;
 
-        currentStudentGrade = (decimal)sumAssignmentScores / currentAssignments;
+            if (gradedAssignments <= examAssignments)
+            {            // add each score to the sum
+                sumAssignmentScores += score;
+            }
+            else
+            {
+                sumAssignmentScores += score / 10; // if there are more scores than assignments, ignore the extra scores
+            }
+        }
+        // calculate the current student's grade
+        // by dividing the sum of assignment scores by the number of exam assignments
+        currentStudentGrade = (decimal)sumAssignmentScores / examAssignments;
+
         string currentStudentLetterGrade = "";
 
         if (currentStudentGrade >= 97)
@@ -81,7 +98,6 @@ foreach (string name in studentNames)
 
         Console.WriteLine($"{currentStudent}\t\t{currentStudentGrade}\t{currentStudentLetterGrade}");
     }
-}
 
 Console.WriteLine("Press the Enter key to continue");
 Console.ReadLine();
