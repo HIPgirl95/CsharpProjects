@@ -10,23 +10,36 @@ int[] loganScores = new int[] { 90, 95, 87, 88, 96 };
 
 string[] studentNames = new string[] { "Sophia", "Andrew", "Emma", "Logan" };
 
+int[] studentScores = new int[10];
+
+//report card header
+Console.WriteLine("Student\t\tGrade\n");
+
 foreach (string name in studentNames)
 {
-    if (name == "Sophia")
-    {
-        int sophiaSum = 0;
-        decimal sophiaScore;
+    string currentStudent = name;
 
-        foreach (int score in sophiaScores)
+    if (currentStudent == "Sophia")
+        studentScores = sophiaScores;
+    else if (currentStudent == "Andrew")
+        studentScores = andrewScores;
+    else if (currentStudent == "Emma")
+        studentScores = emmaScores;
+    else if (currentStudent == "Logan")
+        studentScores = loganScores;
+    {
+        int sumAssignmentScores = 0;
+        decimal currentStudentGrade;
+
+        foreach (int score in studentScores)
         {
             // add each score to the sum
-            sophiaSum += score;
+            sumAssignmentScores += score;
         }
-        
-        sophiaScore = (decimal)sophiaSum / currentAssignments;
 
-        Console.WriteLine("Student\t\tGrade\n");
-        Console.WriteLine("Sophia:\t\t" + sophiaScore + "\tA-");
+        currentStudentGrade = (decimal)sumAssignmentScores / currentAssignments;
+
+        Console.WriteLine($"{currentStudent}\t\t{currentStudentGrade}\t?");
     }
 }
 
